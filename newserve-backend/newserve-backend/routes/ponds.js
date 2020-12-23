@@ -122,6 +122,7 @@ router.get("/:id", (req, res, next) => {
       },
     },
   ]).then((response) => {
+    response = response[0];
     const fishChart = [
       {
         name: "จำนวนปลา",
