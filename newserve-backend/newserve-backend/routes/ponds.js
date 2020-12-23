@@ -96,7 +96,32 @@ router.delete("/delete/:id", (req, res, next) => {
 });
 router.get("/:id", (req, res, next) => {
   const DATA = { _id: req.params.id };
-  Ponds.findOne(DATA).then((response) => {
+  const FROM = "timelines";
+  const LOCAL_FIELD = "fish_type";
+  const FOREIGN_FIELD = "fish_type";
+  const AS = "timeline";
+  const MATCH = { _id: ObjectId(req.params.id) };
+  Ponds.aggregate([
+    {
+      $match: MATCH,
+    },
+    {
+      $lookup: {
+        from: FROM,
+        localField: LOCAL_FIELD,
+        foreignField: FOREIGN_FIELD,
+        as: AS,
+      },
+    },
+    {
+      $lookup: {
+        from: "fish",
+        localField: "fish_type",
+        foreignField: "_id",
+        as: "fish_data",
+      },
+    },
+  ]).then((response) => {
     const fishChart = [
       {
         name: "จำนวนปลา",
@@ -120,6 +145,15 @@ router.get("/:id", (req, res, next) => {
       fishChart: fishChart,
     });
   });
+  // Ponds.findOne(DATA).then((response) => {
+
+  //   res.json({
+  //     code: 0,
+  //     message: "Query Success!",
+  //     result: response,
+  //     fishChart: fishChart,
+  //   });
+  // });
 });
 router.post("/dead", (req, res, next) => {
   const FIND_DATA = { _id: req.body._id };
