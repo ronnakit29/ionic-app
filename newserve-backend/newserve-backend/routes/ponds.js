@@ -53,7 +53,7 @@ router.get("/u/:user_id", (req, res, next) => {
 router.post("/add", (req, res, next) => {
   const DATA = {
     p_date: new Date(),
-    user_id: req.body.user_id,
+    user_id: ObjectId(req.body.user_id),
     p_name: req.body.p_name,
     fish_type: req.body.fish_type,
     p_width: req.body.p_width,
@@ -73,7 +73,7 @@ router.post("/edit", (req, res, next) => {
   const FIND_DATA = { _id: ObjectId(req.body._id) };
   const UPDATE_DATA = {
     p_date: new Date(),
-    user_id: req.body.user_id,
+    user_id: ObjectId(req.body.user_id),
     p_name: req.body.p_name,
     fish_type: req.body.fish_type,
     p_width: req.body.p_width,
