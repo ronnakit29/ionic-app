@@ -41,6 +41,8 @@ var stockRouter = require("./routes/stock");
 app.use("/stock", stockRouter);
 var cartRouter = require("./routes/cart");
 app.use("/cart", cartRouter);
+var authenRouter = require("./routes/authen");
+app.use("/authen", authenRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

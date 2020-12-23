@@ -42,7 +42,7 @@ router.post("/edit", (req, res, next) => {
   });
 });
 router.get("/t/:id", (req, res, next) => {
-  const DATA = { user_id: ObjectId(req.params.id) };
+  const DATA = { user_id: req.params.id };
   Fish.find(DATA).then((response) => {
     res.json({ code: 0, message: "Query Success!", result: response });
   });

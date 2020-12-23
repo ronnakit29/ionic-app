@@ -34,7 +34,7 @@ router.get("/t/:user_id", (req, res, next) => {
   const LOCAL_FIELD = "category_id";
   const FOREIGN_FIELD = "_id";
   const AS = "category_data";
-  const MATCH = { user_id: req.params.user_id };
+  const MATCH = { tra_id: req.params.user_id };
   Products.aggregate([
     {
       $match: MATCH,

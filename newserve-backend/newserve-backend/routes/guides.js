@@ -37,7 +37,7 @@ router.get("/t/:user_id", (req, res, next) => {
   const FOREIGN_FIELD = "_id";
   const AS = "users_data";
   Guides.aggregate([
-    { $match: {} },
+    { $match: MATCH },
     {
       $lookup: {
         from: FROM,
