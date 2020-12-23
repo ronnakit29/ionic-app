@@ -97,7 +97,28 @@ router.delete("/delete/:id", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   const DATA = { _id: req.params.id };
   Ponds.findOne(DATA).then((response) => {
-    res.json({ code: 0, message: "Query Success!", result: response });
+    const fishChart = [
+      {
+        name: "จำนวนปลา",
+        population: parseInt(response.p_number_fish),
+        color: "rgb(131,167,34)",
+        legendFontColor: "#7f7f7f",
+        legendFontSize: 15,
+      },
+      {
+        name: "จำนวนปลาตาย",
+        population: parseInt(response.p_number_dead),
+        color: "rgb(255,0,0)",
+        legendFontColor: "#7f7f7f",
+        legendFontSize: 15,
+      },
+    ];
+    res.json({
+      code: 0,
+      message: "Query Success!",
+      result: response,
+      fishChart: fishChart,
+    });
   });
 });
 router.post("/dead", (req, res, next) => {

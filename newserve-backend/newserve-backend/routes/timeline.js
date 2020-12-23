@@ -25,6 +25,7 @@ router.get("/t/:user_id/f/:fish_id", (req, res, next) => {
   const FOREIGN_FIELD = "_id";
   const AS = "product_list";
   Timeline.aggregate([
+    { $match: DATA },
     {
       $lookup: {
         from: FROM,
@@ -51,7 +52,7 @@ router.post("/add", (req, res, next) => {
   const DATA = {
     product_recommend: product_recommend,
     user_id: ObjectId(req.body.user_id),
-    timeline_day: req.body.timeline_day,
+    timeline_day: parseInt(req.body.timeline_day),
     timeline_title: req.body.timeline_title,
     timeline_detail: req.body.timeline_detail,
     timeline_youtube: req.body.timeline_youtube,
@@ -70,7 +71,7 @@ router.post("/edit", (req, res, next) => {
   const UPDATE_DATA = {
     product_recommend: product_recommend,
     user_id: ObjectId(req.body.user_id),
-    timeline_day: req.body.timeline_day,
+    timeline_day: parseInt(req.body.timeline_day),
     timeline_title: req.body.timeline_title,
     timeline_detail: req.body.timeline_detail,
     timeline_youtube: req.body.timeline_youtube,
