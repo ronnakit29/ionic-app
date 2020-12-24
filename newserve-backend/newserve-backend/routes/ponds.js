@@ -157,8 +157,8 @@ router.get("/:id", (req, res, next) => {
   // });
 });
 router.post("/dead", (req, res, next) => {
-  const FIND_DATA = { _id: req.body._id };
-  const UPDATE_DATA = { $inc: { p_fish_dead: +req.body.qty } };
+  const FIND_DATA = { _id: ObjectId(req.body._id) };
+  const UPDATE_DATA = { $inc: { p_number_dead: +parseInt(req.body.qty) } };
   Ponds.update(FIND_DATA, UPDATE_DATA).then((response) => {
     res.json({ code: 0, message: "Query Success!", result: response });
   });
